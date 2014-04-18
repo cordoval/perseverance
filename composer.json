@@ -1,0 +1,34 @@
+{
+    "name": "cordoval/perseverance",
+    "type": "library",
+    "description": "Library to drive features to production and refactor your own legacy",
+    "keywords": [
+        "perseverance", "refactoring", "toggle", "features", "drive"
+    ],
+    "homepage": "http://pilotci.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Luis Cordova",
+            "email": "cordoval@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~3.7",
+        "raulfraile/ladybug": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {"Cordoval\\": "src"}
+    },
+    "autoload-dev": {
+        "psr-4": {"Cordoval\\Tests\\": "tests"}
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

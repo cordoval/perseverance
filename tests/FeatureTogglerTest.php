@@ -2,35 +2,43 @@
 
 namespace Cordoval\Tests;
 
-class FeatureTogglerTest
+use Cordoval\FeatureToggler;
+
+class FeatureTogglerTest extends \PHPUnit_Framework_TestCase
 {
-    const OFF = false;
-    const ON = true;
+    /**
+     * @var \Cordoval\FeatureToggler
+     */
+    protected $perseverance;
 
-    protected $features;
-
-    public function __construct(array $features)
+    public function setUp()
     {
-        $this->features = $features;
+        $this->perseverance = new FeatureToggler(
+            [
+                'feature_a' => true,
+                'feature_b' => false,
+            ]
+        );
     }
 
-    public function isOff($feature)
+    /**
+     * @test
+     */
+    public function it_checks_that_feature_is_on_or_off()
     {
-        return !$this->features[$feature];
+        $this->assertTrue($this->perseverance->isOn('feature_a'));
+        $this->assertTrue($this->perseverance->isOff('feature_b'));
     }
 
-    public function isOn($feature)
+    /**
+     * @test
+     */
+    public function it_checks_that_feature_is_turned_off_or_on()
     {
-        return $this->features[$feature];
-    }
+        $this->perseverance->turnOff('feature_a');
+        $this->assertFalse($this->perseverance->isOn('feature_a'));
 
-    public function turnOn($feature)
-    {
-        $this->features[$feature] = self::ON;
-    }
-
-    public function turnOff($feature)
-    {
-        $this->features[$feature] = self::OFF;
+        $this->perseverance->turnOn('feature_b');
+        $this->assertTrue($this->perseverance->isOn('feature_b'));
     }
 }
